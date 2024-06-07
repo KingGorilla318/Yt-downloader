@@ -58,4 +58,5 @@ def download():
         return redirect(url_for('index', error="An error occurred: " + str(e)))
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Run the app on 0.0.0.0 with a specified port
+    app.run(host='0.0.0.0', port=8080)
