@@ -1,9 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, send_file
 from pytube import YouTube
 import os
-import requests
 import re
-import shutil
 
 app = Flask(__name__)
 
@@ -58,19 +56,6 @@ def download():
             return redirect(url_for('index', error="Please provide a valid URL."))
     except Exception as e:
         return redirect(url_for('index', error="An error occurred: " + str(e)))
-
-def download_video(url):
-    try:
-        file_path = requests.post('http://127.0.0.1:5000/download', data={'url': url}).text
-        if file_path:
-            print("Video downloaded successfully!")
-            print("File Path:", file_path)
-            # You can do further processing with the downloaded file here
-            # For example, move the file to another location, display it to the user, etc.
-        else:
-            print("No file path returned. Download failed.")
-    except Exception as e:
-        print("An error occurred:", e)
 
 if __name__ == '__main__':
     app.run(debug=True)
